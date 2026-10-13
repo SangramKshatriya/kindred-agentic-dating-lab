@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d0a">
+  <meta name="description" content="A consent-first agentic dating simulation with explainable profile analysis, agent conversations and compatibility rankings.">
+  <title>Kindred — Agentic Dating Lab</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar wrap">
+    <a class="brand" href="#top" aria-label="Kindred home"><span class="brand-mark">♡</span><span>kindred<span class="brand-dot">.</span></span></a>
+    <nav class="topnav" aria-label="Main navigation">
+      <a href="#profiles">People</a><a href="#date-lab">Date lab</a><a href="#rankings">Rankings</a>
+    </nav>
+    <button class="button button-small button-quiet" id="open-add-top">＋ Add a person</button>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> THE AGENTIC DATING EXPERIMENT</div>
+        <h1>What if your<br><em>best side</em> got to date?</h1>
+        <p class="hero-intro">A matchmaking lab where every person has an agent, every profile gets a thoughtful read, and the agents meet before a human ever has to.</p>
+        <div class="hero-actions"><a class="button button-gold" href="#profiles">Explore the people <span>↘</span></a><button class="button button-outline" id="hero-run">Run the match engine <span>✳</span></button></div>
+        <p class="micro-note"><span>✦</span> Built around stated interests, values and preferences — not guesswork.</p>
+      </div>
+      <div class="hero-art" aria-label="Illustration of two agents exchanging conversation">
+        <div class="orbital orbital-a"></div><div class="orbital orbital-b"></div>
+        <div class="orbit-label label-top">THEIR AGENT</div><div class="orbit-label label-bottom">YOUR AGENT</div>
+        <div class="agent-card agent-left"><div class="agent-face face-one">A</div><div class="agent-line"></div><div class="agent-line short"></div><span class="agent-caption">curious · warm</span></div>
+        <div class="agent-card agent-right"><div class="agent-face face-two">K</div><div class="agent-line"></div><div class="agent-line short"></div><span class="agent-caption">thoughtful · witty</span></div>
+        <div class="connect-heart">♡</div>
+        <div class="floating-note note-one"><span class="spark">✦</span><div><b>Common ground found</b><small>Shared values + interests</small></div></div>
+        <div class="floating-note note-two"><span class="pulse-icon">↗</span><div><b>Conversation started</b><small>Low-pressure first date</small></div></div>
+        <div class="art-caption">Two agents. One possibility.</div>
+      </div>
+    </section>
+
+    <section class="metrics" aria-label="Demo metrics">
+      <div class="metric"><span class="metric-number" id="metric-people">25</span><span class="metric-label">sample personas</span></div>
+      <div class="metric-divider"></div>
+      <div class="metric"><span class="metric-number" id="metric-pairs">300</span><span class="metric-label">possible pairings</span></div>
+      <div class="metric-divider"></div>
+      <div class="metric"><span class="metric-number">2</span><span class="metric-label">profile references per person</span></div>
+      <div class="metric-divider"></div>
+      <div class="metric"><span class="metric-number">0</span><span class="metric-label">messages sent to anyone</span></div>
+    </section>
+
+    <section class="how-section section-space">
+      <div class="section-heading"><div><div class="eyebrow">THE IDEA, IN FOUR STEPS</div><h2>Less swiping. <em>More signal.</em></h2></div><p>Agents do the first pass: understand what matters, meet on your behalf in a simulation, then show their reasoning.</p></div>
+      <div class="steps-grid">
+        <article class="step-card"><div class="step-index">01 <span>↗</span></div><div class="step-icon">◎</div><h3>Build a profile</h3><p>Start with a self-written summary, interests, values and a clearly stated connection goal.</p></article>
+        <article class="step-card"><div class="step-index">02 <span>↗</span></div><div class="step-icon">⌕</div><h3>Understand the person</h3><p>Each profile gets an inspectable readout: what they enjoy, what they value and what they say they need.</p></article>
+        <article class="step-card"><div class="step-index">03 <span>↗</span></div><div class="step-icon">♡</div><h3>Let agents meet</h3><p>Agents test a conversation, find natural openers and surface questions worth asking in real life.</p></article>
+        <article class="step-card"><div class="step-index">04 <span>↗</span></div><div class="step-icon">↟</div><h3>See the ranking</h3><p>Every score comes with reasons, shared interests, and an honest view of what still needs a conversation.</p></article>
+      </div>
+    </section>
+
+    <section class="workspace section-space" id="profiles">
+      <div class="section-heading section-heading-tight"><div><div class="eyebrow">THE PEOPLE</div><h2>Meet the <em>line-up.</em></h2></div><button class="button button-outline" id="open-add">＋ Add a consenting adult</button></div>
+      <div class="workspace-toolbar">
+        <label class="searchbox"><span>⌕</span><input id="profile-search" type="search" placeholder="Search by name, interest or city…" autocomplete="off"></label>
+        <div class="filter-pills" role="group" aria-label="Filter profile type"><button class="filter-pill active" data-filter="all">All people <span id="filter-all-count">25</span></button><button class="filter-pill" data-filter="demo">Demo personas</button><button class="filter-pill" data-filter="consented">Consented profiles</button></div>
+      </div>
+      <div class="profiles-layout">
+        <div class="profiles-column">
+          <div class="profiles-grid" id="profiles-grid" aria-live="polite"><div class="loading-card">Arranging the line-up…</div></div>
+          <div class="empty-state hidden" id="empty-profiles">No profiles match that search. Try another name or interest.</div>
+        </div>
+        <aside class="profile-detail" id="profile-detail" aria-live="polite">
+          <div class="detail-topline"><span class="eyebrow">PROFILE READOUT</span><span class="status-pill"><span class="live-dot"></span> READY</span></div>
+          <div id="detail-content"><div class="detail-placeholder"><span class="placeholder-spark">✳</span><h3>Select a person</h3><p>Choose any profile to inspect their goals, interests, stated values and top-ranked matches.</p></div></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="date-lab section-space" id="date-lab">
+      <div class="date-lab-copy"><div class="eyebrow">THE DATE LAB</div><h2>Let the agents<br><em>break the ice.</em></h2><p>Choose two people and watch a short, fictional first-date conversation. The agents look for common ground, bring up meaningful questions and suggest what could be explored in person.</p><div class="simulation-note"><span>✳</span><span><b>Simulation, not impersonation.</b><br>No one is contacted, no date is booked, and the dialogue is not presented as a real person's words.</span></div></div>
+      <div class="date-console">
+        <div class="console-header"><span class="console-led"></span><span>AGENT CONVERSATION ENGINE</span><span class="console-session">SESSION 001</span></div>
+        <div class="select-pair"><label>AGENT A<select id="date-person-a" aria-label="First person"></select></label><div class="pair-plus">＋</div><label>AGENT B<select id="date-person-b" aria-label="Second person"></select></label></div>
+        <button class="button button-gold button-full" id="start-date">Start their simulated date <span>↗</span></button>
+        <div id="date-result" class="date-result"><div class="date-empty-icon">♡</div><p>Pick two profiles above, then let their agents start a conversation.</p></div>
+      </div>
+    </section>
+
+    <section class="rankings-section section-space" id="rankings">
+      <div class="section-heading"><div><div class="eyebrow">THE MATCH BOARD</div><h2>Compatibility, <em>with reasons.</em></h2></div><div class="rank-actions"><span class="ranking-status" id="ranking-status">Not run yet</span><button class="button button-gold" id="run-rankings">Rank everyone <span>↗</span></button></div></div>
+      <p class="rank-intro">The scoring is a transparent heuristic, not a prediction of relationship success. Scores compare the interests, values, goals and age ranges people have explicitly stated.</p>
+      <div id="rankings-content" class="rankings-grid"><div class="rank-placeholder"><span>↟</span><h3>The board is waiting.</h3><p>Run the match engine to see the top matches for every profile.</p></div></div>
+    </section>
+
+    <section class="trust-section section-space">
+      <div class="trust-icon">✳</div><div><div class="eyebrow">A NOTE ON SOURCES & CONSENT</div><h2>Good matchmaking starts with <em>good boundaries.</em></h2><p>The 25 built-in personas are fictional test data, not real people or scraped profiles. To add a real adult, use their explicit permission, their two profile URLs, and a self-written summary they approved. This demo stores those URLs as references; it does not scrape Instagram or LinkedIn, infer sensitive traits, send messages, or arrange real dates.</p></div><a href="#add-person" class="text-link" id="trust-add-link">Add a consented profile ↗</a>
+    </section>
+
+    <footer class="footer"><a class="brand" href="#top"><span class="brand-mark">♡</span><span>kindred<span class="brand-dot">.</span></span></a><span>Designed for thoughtful introductions, not automated assumptions.</span><span class="footer-right">KINDRED LAB · 2026</span></footer>
+  </main>
+
+  <div class="modal-backdrop hidden" id="add-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <div class="modal-heading"><div><div class="eyebrow">CONSENTED PROFILE INTAKE</div><h2 id="modal-title">Add a <em>real person.</em></h2></div><button class="modal-close" id="close-add" aria-label="Close dialog">×</button></div>
+      <p class="modal-intro">Only add an adult who explicitly agreed to take part. Profile links are stored as references; the app does not fetch or scrape their contents.</p>
+      <form id="add-profile-form">
+        <div class="form-grid">
+          <label>Display name<input name="name" required minlength="2" maxlength="80" placeholder="Name they approve"></label>
+          <label>Age<input name="age" required type="number" min="18" max="100" placeholder="18+"></label>
+          <label>City / broad location<input name="city" required maxlength="80" placeholder="e.g. Delhi"></label>
+          <label>Connection goal<select name="goal" required><option value="long-term relationship">Long-term relationship</option><option value="meaningful connection">Meaningful connection</option><option value="friendship first">Friendship first</option><option value="casual dating">Casual dating</option></select></label>
+          <label>Preferred ages · from<input name="min_age" type="number" min="18" max="100" value="24" required></label>
+          <label>Preferred ages · to<input name="max_age" type="number" min="18" max="100" value="35" required></label>
+          <label class="span-2">Public LinkedIn profile URL<input name="linkedin_url" type="url" required placeholder="https://www.linkedin.com/in/…"></label>
+          <label class="span-2">Public Instagram profile URL<input name="instagram_url" type="url" required placeholder="https://www.instagram.com/…"></label>
+          <label class="span-2">Approved self-written summary<textarea name="bio" required minlength="20" maxlength="600" rows="3" placeholder="What do they want a potential match to know about them? (20–600 characters)"></textarea></label>
+          <label class="span-2">Interests <small>Separate with commas</small><input name="interests" required placeholder="e.g. cooking, hiking, live music"></label>
+          <label class="span-2">Values <small>Separate with commas</small><input name="values" required placeholder="e.g. kindness, curiosity, honesty"></label>
+          <label class="span-2">Conversation style<select name="style"><option value="thoughtful">Thoughtful</option><option value="curious">Curious</option><option value="playful">Playful</option><option value="expressive">Expressive</option><option value="warm">Warm</option><option value="direct">Direct</option></select></label>
+        </div>
+        <label class="consent-check"><input name="consent" type="checkbox" required><span>I confirm this is an adult who has explicitly agreed to have this approved summary and these profile links used in this matchmaking demo. I will not add private or sensitive information.</span></label>
+        <div id="form-feedback" class="form-feedback hidden" role="alert"></div>
+        <div class="modal-actions"><button type="button" class="button button-outline" id="cancel-add">Cancel</button><button type="submit" class="button button-gold" id="save-profile">Save profile with consent ↗</button></div>
+      </form>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

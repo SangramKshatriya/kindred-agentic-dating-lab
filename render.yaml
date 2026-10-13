@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: kindred-agentic-dating
+    runtime: docker
+    plan: free
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: APP_DB
+        value: /tmp/kindred-app-data.sqlite3

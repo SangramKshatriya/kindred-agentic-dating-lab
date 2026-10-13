@@ -1,0 +1,5 @@
+.git
+__pycache__
+*.pyc
+app_data.sqlite3
+*.mp4
